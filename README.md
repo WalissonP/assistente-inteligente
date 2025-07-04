@@ -1,2 +1,2 @@
-# assistente inteligente
-Assistente e animado utilizando Inteligência Artificial
+# assistente inteligênte
+Assistente inteligênte e animado utilizando Inteligência Artificial
