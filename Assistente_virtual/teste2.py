@@ -8,6 +8,9 @@ import re
 import tempfile
 from glob import glob
 
+# ==== Caminho base do projeto (pasta onde o script está) ====
+caminho_base = os.path.dirname(os.path.abspath(__file__))
+
 # ==== Função para ajustar proporção da imagem ====
 def ajustar_proporcao(rect, largura_disp, altura_disp):
     proporcao = min(largura_disp / rect.width, altura_disp / rect.height)
@@ -33,7 +36,7 @@ for voice in engine.getProperty('voices'):
 engine.setProperty('rate', 200)
 
 # ==== Carrega os frames do avatar ouvindo (animação) ====
-frame_paths_ouvindo = sorted(glob("frames_ouvindo/*.png"))
+frame_paths_ouvindo = sorted(glob(os.path.join(caminho_base, "frames_ouvindo", "*.png")))
 frames_ouvindo = []
 for fp in frame_paths_ouvindo:
     img = pygame.image.load(fp)
@@ -42,7 +45,7 @@ for fp in frame_paths_ouvindo:
     frames_ouvindo.append(img_redimensionada)
 
 # ==== Carrega os frames da boca falando ====
-frame_paths = sorted(glob("frames_falando/*.png"))
+frame_paths = sorted(glob(os.path.join(caminho_base, "frames_falando", "*.png")))
 frames = []
 for fp in frame_paths:
     img = pygame.image.load(fp)
@@ -64,6 +67,11 @@ def limpar_texto(texto):
 def falar_com_pyttsx3(texto):
     global interromper_fala
     interromper_fala = False
+
+    if not frames:
+        print("❌ Nenhum frame encontrado em 'frames_falando/'. Verifique se há imagens PNG na pasta.")
+        pygame.quit()
+        exit()
 
     texto_limpo = limpar_texto(texto)
 
@@ -89,6 +97,7 @@ def falar_com_pyttsx3(texto):
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Clique esquerdo
                 interromper_fala = True
                 canal.stop()
+                break
 
         if interromper_fala:
             break
@@ -106,6 +115,11 @@ def falar_com_pyttsx3(texto):
     os.remove(nome_arquivo)
 
 def ouvir_microfone():
+    if not frames_ouvindo:
+        print("❌ Nenhum frame encontrado em 'frames_ouvindo/'. Verifique se há imagens PNG na pasta.")
+        pygame.quit()
+        exit()
+
     clock = pygame.time.Clock()
     frame_index = 0
     num_frames = len(frames_ouvindo)
@@ -172,7 +186,6 @@ def responder_com_groq(pergunta):
 
         historico_mensagens.append({"role": "assistant", "content": resposta})
 
-        # Limitar histórico para não pesar
         if len(historico_mensagens) > 20:
             historico_mensagens = historico_mensagens[-20:]
 
