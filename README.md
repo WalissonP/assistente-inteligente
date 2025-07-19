@@ -30,7 +30,8 @@ Um assistente virtual interativo em **tela cheia**, com **voz masculina**, **ani
 | `glob, os, re`    | Gerenciamento de arquivos e manipulação        |
 
 ---
-<img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/abf1d314-b9ff-4ea7-9c98-094d69f185dd" />
-<img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/d5c97104-903f-4c4b-9508-6f5e75c0a237" />
-<img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/9af6ab7e-1735-4220-9d9e-dbcf9a97d146" />
+<img width="200" height="300" alt="image" src="https://github.com/user-attachments/assets/abf1d314-b9ff-4ea7-9c98-094d69f185dd" />
+<img width="200" height="300" alt="image" src="https://github.com/user-attachments/assets/d5c97104-903f-4c4b-9508-6f5e75c0a237" />
+<img width="200" height="300" alt="image" src="https://github.com/user-attachments/assets/9af6ab7e-1735-4220-9d9e-dbcf9a97d146" />
 
+---
